@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{c6839d89-3497-4dbf-a7b5-9aa397300d1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{3870b58e-7d3d-4203-bdf9-678dfbec3370}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{15a93758-75de-4cf8-9a86-df2889ad3d36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{14c7fee2-d32a-4650-9c53-e041451397bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{1850c042-63d6-4258-b021-30172ce1920e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{6d60f638-0470-4dd9-b188-88e856be3ee0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Systems">
+      <UniqueIdentifier>{2891e90b-b50e-48cd-b359-4b0d4902b1c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{c6b56e54-8500-4d50-aa33-54979048eca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{40f6e9bf-1179-44a1-a814-321982565468}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\simple_shader.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\simple_shader.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\compileAll.bat">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="scripts\main.lua">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="shaders\billboard_shader.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\billboard_shader.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\physics.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\physics.vert">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\graphics\MeDevice.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\MePipeline.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\MeRenderer.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\MeSwapChain.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\misc\MeAudio.hpp">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\misc\MeWindow.hpp">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\misc\miniaudio.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\MeGameObject.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MeAppBase.hpp" />
+    <ClInclude Include="src\engine\MeCamera.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\MeScript.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\MeModel.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\misc\tiny_obj_loader.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\misc\MeUtils.hpp">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\MeBuffer.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\MeDescriptors.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\systems\MeSimpleRenderSystem.hpp">
+      <Filter>Renderer\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\systems\MeBillboardRenderSystem.hpp">
+      <Filter>Renderer\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\systems\MeRenderSystemsUtility.hpp">
+      <Filter>Renderer\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\physics\MePhysicsColliders.hpp">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\MePhysicsModel.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\misc\MeObjLoader.hpp">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\graphics\systems\MePhysicsRenderSystem.hpp">
+      <Filter>Renderer\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\misc\MeCommon.hpp">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="src\misc\MeBehavior.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="game\MeGameBehaviors.hpp">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\MeResources.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\MeLuaWrappers.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\engine\MeInput.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\physics\MePhysicsObject.hpp">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\physics\MePhysicsServer.hpp">
+      <Filter>Physics</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\graphics\MeDevice.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\MePipeline.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\MeRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\MeSwapChain.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\misc\MeWindow.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="MeAppBase.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="src\engine\MeCamera.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\MeScript.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\MeModel.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\MeBuffer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\MeDescriptors.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\systems\MeSimpleRenderSystem.cpp">
+      <Filter>Renderer\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\systems\MeBillboardRenderSystem.cpp">
+      <Filter>Renderer\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\physics\MePhysicsAlgos.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\MePhysicsModel.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\misc\MeObjLoader.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\systems\MePhysicsRenderSystem.cpp">
+      <Filter>Renderer\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\physics\MePhysicsServer.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
