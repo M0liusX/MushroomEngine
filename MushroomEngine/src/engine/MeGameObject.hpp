@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MeModel.hpp"
+#include "MeTexture.hpp"
 #include "MeBehavior.hpp"
 #include "MeCommon.hpp"
 #include "MePhysicsModel.hpp"
@@ -29,6 +30,7 @@ public:
    std::shared_ptr<MeModel> model{};
    std::shared_ptr<MePhysicsModel> pModel{};
    std::shared_ptr<MeBehavior> behavior;
+   std::shared_ptr<MeTexture> diffuseMap = nullptr;
    glm::vec3 color{};
    TransformComponent transform{};
    id_t physicsObject = -1;

@@ -2,6 +2,7 @@
 
 #include "MeCamera.hpp"
 #include "MeDevice.hpp"
+#include "MeDescriptors.hpp"
 #include "MeGameObject.hpp"
 #include "MePhysicsServer.hpp"
 #include "MePipeline.hpp"
@@ -14,6 +15,7 @@ struct FrameInfo {
    VkCommandBuffer commandBuffer;
    MeCamera& camera;
    VkDescriptorSet desciptorSet;
+   MeDescriptorPool& frameDescriptorPool;
    MeGameObject::Map& gameObjects;
    MePhysicsServer& physicsServer;
 };

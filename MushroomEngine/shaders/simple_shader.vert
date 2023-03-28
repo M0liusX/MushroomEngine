@@ -8,6 +8,7 @@ layout(location = 3) in vec2 texcoord;
 layout(location = 0) out vec3 fragColor;
 layout(location = 1) out vec3 fragWorldPos;
 layout(location = 2) out vec3 fragWorldNormal;
+layout(location = 3) out vec2 fragTexCoord;
 
 //layout(location = 2) out vec2 fragTexCoord;
 
@@ -32,8 +33,10 @@ void main() {
    fragWorldPos = modelWorldPosition.xyz;
    fragWorldNormal = normalize(mat3(push.normalMatrix) * normal);
    fragColor = color;
+   fragTexCoord = texcoord;
 
-   //vec3 directionFromLight = modelWorldPosition.xyz - ubo.pointLightPosition;
+   /* Vertex Lighting! */
+   // vec3 directionFromLight = modelWorldPosition.xyz - ubo.pointLightPosition;
    //float attenuation = 1.0 / dot(directionFromLight, directionFromLight); // distance squared
    //vec3 lightColor = ubo.pointLightColor.xyz * ubo.pointLightColor.w * attenuation;
 
@@ -42,5 +45,4 @@ void main() {
    //float lightIntensity = AMBIENT + max(dot(normalWorldSpace, ubo.directionToLight), 0);
 
    //fragColor = (diffuseLight + ambientLight) * color;
-   //fragTexCoord = texcoord;
 }

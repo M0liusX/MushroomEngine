@@ -22,7 +22,7 @@ namespace me {
 
       std::unique_ptr<MePipeline> mePipeline;
       VkPipelineLayout pipelineLayout;
-
+      // std::unique_ptr<MeDescriptorSetLayout> renderSystemLayout;
    };
 
 }  // namespace me

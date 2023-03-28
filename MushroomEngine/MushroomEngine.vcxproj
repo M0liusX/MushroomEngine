@@ -203,6 +203,7 @@
     <ClInclude Include="src\engine\MePhysicsModel.hpp" />
     <ClInclude Include="src\engine\MeResources.hpp" />
     <ClInclude Include="src\engine\MeScript.hpp" />
+    <ClInclude Include="src\engine\MeTexture.hpp" />
     <ClInclude Include="src\graphics\MeBuffer.hpp" />
     <ClInclude Include="src\graphics\MeDescriptors.hpp" />
     <ClInclude Include="src\graphics\MeDevice.hpp" />
@@ -232,6 +233,7 @@
     <ClCompile Include="src\engine\MeModel.cpp" />
     <ClCompile Include="src\engine\MePhysicsModel.cpp" />
     <ClCompile Include="src\engine\MeScript.cpp" />
+    <ClCompile Include="src\engine\MeTexture.cpp" />
     <ClCompile Include="src\graphics\MeBuffer.cpp" />
     <ClCompile Include="src\graphics\MeDescriptors.cpp" />
     <ClCompile Include="src\graphics\MeDevice.cpp" />

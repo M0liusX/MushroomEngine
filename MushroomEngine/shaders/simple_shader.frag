@@ -3,7 +3,7 @@
 layout(location = 0) in vec3 fragColor;
 layout(location = 1) in vec3 fragWorldPos;
 layout(location = 2) in vec3 fragWorldNormal;
-//layout(location = 1) in vec2 fragTexCoord;
+layout(location = 3) in vec2 fragTexCoord;
 
 layout(location = 0) out vec4 outColor;
 
@@ -16,6 +16,8 @@ layout(set = 0, binding = 0) uniform GlobalUbo {
     vec3 pointLightPosition;
     vec4 pointLightColor;
 } ubo;
+
+layout (set = 0, binding = 1) uniform sampler2D diffuseMap;
 
 layout(push_constant) uniform Push {
    mat4 modelMatrix;
@@ -33,5 +35,9 @@ void main() {
 
    vec3 pdLight = pLightColor * max(dot(fwnn, normalize(directionToLight)), 0);
    vec3 ddLight = dLightColor * max(dot(fwnn, normalize(-ubo.directionalLight)), 0);
-   outColor = vec4((ddLight + pdLight + ambientLight) * fragColor, 1.0f);
+   vec3 color = texture(diffuseMap, fragTexCoord).xyz;
+   outColor = vec4( (ddLight + pdLight + ambientLight) * color * fragColor, 1.0f);
+   // outColor = vec4(color, 1.0f);
+   // outColor = vec4((ddLight + pdLight + ambientLight) * fragColor, 1.0f);
+   // outColor = vec4(diffuseLight * color + specularLight * fragColor, 1.0);
 }

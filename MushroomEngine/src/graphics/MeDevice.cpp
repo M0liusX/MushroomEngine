@@ -512,7 +512,9 @@ void MeDevice::transitionImageLayout(
    VkImage image,
    VkFormat format,
    VkImageLayout oldLayout,
-   VkImageLayout newLayout) {
+   VkImageLayout newLayout,
+   uint32_t mipLevels,
+   uint32_t layerCount) {
    VkCommandBuffer commandBuffer = beginSingleTimeCommands();
 
    VkImageMemoryBarrier barrier{};
@@ -524,9 +526,9 @@ void MeDevice::transitionImageLayout(
    barrier.image = image;
    barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
    barrier.subresourceRange.baseMipLevel = 0;
-   barrier.subresourceRange.levelCount = 1;
+   barrier.subresourceRange.levelCount = mipLevels;
    barrier.subresourceRange.baseArrayLayer = 0;
-   barrier.subresourceRange.layerCount = 1;
+   barrier.subresourceRange.layerCount = layerCount;
 
    VkPipelineStageFlags sourceStage;
    VkPipelineStageFlags destinationStage;

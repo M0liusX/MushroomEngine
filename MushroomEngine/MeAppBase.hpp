@@ -51,6 +51,7 @@ private:
 
    /* XXX: Destroy pool before device! */
    std::unique_ptr<MeDescriptorPool> globalDescriptorPool{};
+   std::vector<std::unique_ptr<MeDescriptorPool>> framePools;
    MeResources meResources{ meDevice };
    MeGameObject::Map gameObjects;
    MePhysicsServer physicsWorld;

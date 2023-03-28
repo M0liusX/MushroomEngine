@@ -9,10 +9,10 @@ CUBE = 2
 KINEMATIC = 0
 CHARACTER = 1
 
---_ShowPhysics(App)
+-- _ShowPhysics(App)
 
 object = _LoadGameObject(App)
-_SetModel(App, object, "models/cube.obj")
+_SetModel(App, object, "models/uvcube.obj")
 _SetCollider(App, object, SPHERE)
 _SetPosition(App, object, {x= 2, y= -5, z= 2.5})
 _SetScale(App, object, {x= .3, y= .3, z= .3})
@@ -20,7 +20,7 @@ _SetBehavior(App, object, CHARACTER)
 
 
 cube = _LoadGameObject(App)
-_SetModel(App, cube, "models/cube.obj")
+_SetModel(App, cube, "models/uvcube.obj")
 _SetCollider(App, cube, CUBE)
 _SetPosition(App, cube, {x=0, y=.5, z=2.5})
 _SetScale(App, cube, {x= 5, y=1, z= 5})
@@ -28,7 +28,7 @@ _SetScale(App, cube, {x= 5, y=1, z= 5})
 for i=0,100 do
     offset = math.random(-2, 2) * math.random()
     cube = _LoadGameObject(App)
-    _SetModel(App, cube, "models/cube.obj")
+    _SetModel(App, cube, "models/uvcube.obj")
     _SetCollider(App, cube, CUBE)
     _SetPosition(App, cube, {x=offset, y=.5, z=6.5 + i * 2.5})
     _SetScale(App, cube, {x= 2, y=1, z= 2})

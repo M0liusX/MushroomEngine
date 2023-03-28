@@ -69,6 +69,11 @@ class MeDevice {
       VkDeviceMemory &imageMemory);
   VkImageView createImageView(VkImage image, VkFormat format);
 
+  void transitionImageLayout(
+     VkImage image, VkFormat format,
+     VkImageLayout oldLayout, VkImageLayout newLayout,
+     uint32_t mipLevels = 1, uint32_t layerCount = 1);
+
   VkPhysicalDeviceProperties properties;
 
  private:
@@ -88,7 +93,6 @@ class MeDevice {
   void hasGflwRequiredInstanceExtensions();
   bool checkDeviceExtensionSupport(VkPhysicalDevice device);
   SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
-  void transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout);
 
   VkInstance instance;
   VkDebugUtilsMessengerEXT debugMessenger;

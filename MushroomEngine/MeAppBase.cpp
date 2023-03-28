@@ -41,7 +41,7 @@ namespace me {
 struct GlobalUbo {
    glm::mat4 projection{};
    glm::mat4 view{ 1.f };
-   glm::vec4 ambientLightColor{ 1.f, 1.f, 1.f, .02f };  // w is intensity 
+   glm::vec4 ambientLightColor{ 1.f, 1.f, 1.f, .04f };  // w is intensity 
    glm::vec3 directionalLight{ 1.f, 1.f, 1.f};
    alignas(16) glm::vec4 directionalLightColor{ 1.f, 1.f, 1.f, .5f };  // w is intensity 
    glm::vec3 pointLightPosition{ 0.f, 0.f, 2.5f };
@@ -50,13 +50,18 @@ struct GlobalUbo {
 };
 
 
+// Temp Texture Work
+static std::shared_ptr<MeTexture> testTexture;
+
 MeAppBase::MeAppBase()
 {
+   testTexture = MeTexture::createTextureFromFile(meDevice, "textures/missing.png");
    start();
 }
 
-
-MeAppBase::~MeAppBase() {}
+MeAppBase::~MeAppBase() {
+   testTexture.reset();
+}
 
 
 /* TODO: Move to MeScene! */
@@ -87,16 +92,19 @@ void MeAppBase::setCollider(id_t objectId, id_t colliderId) {
       object.physicsObject = physicsWorld.AddKinematicObject(MePhysicsObject::createPhysicsObject(object.getId(), object.transform));
       physicsWorld.getObject(object.physicsObject).setCollider(SphereCollider::create(glm::vec3(.0f), 0.5f));
       object.pModel = meResources.getPhysicsModel(SPHERE_MODEL);
+      object.diffuseMap = testTexture;
       break;
    case PLANE:
       object.physicsObject = physicsWorld.AddStaticObject(MePhysicsObject::createPhysicsObject(object.getId(), object.transform));
       physicsWorld.getObject(object.physicsObject).setCollider(PlaneCollider::create(glm::vec3(0.f, -1.f, 0.f), 0.f));
       object.pModel = meResources.getPhysicsModel(PLANE_MODEL);
+      object.diffuseMap = testTexture;
       break;
    case CUBE:
       object.physicsObject = physicsWorld.AddStaticObject(MePhysicsObject::createPhysicsObject(object.getId(), object.transform));
       physicsWorld.getObject(object.physicsObject).setCollider(CubeCollider::create(glm::vec3(.0f), glm::vec3(1.f)));
       object.pModel = meResources.getPhysicsModel(CUBE_MODEL);
+      object.diffuseMap = testTexture;
       break;
    default:
       std::cout << "C++ INVALID COLLIDER" << std::endl;
@@ -163,6 +171,16 @@ void MeAppBase::run()
       );
       uboBuffers[i]->map();
    }
+   // Frame descriptor pools
+   framePools.resize(MeSwapChain::MAX_FRAMES_IN_FLIGHT);
+   auto framePoolBuilder = MeDescriptorPool::Builder(meDevice)
+      .setMaxSets(1000)
+      .addPoolSize(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, 1000)
+      .addPoolSize(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, 1000)
+      .setPoolFlags(VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT);
+   for (int i = 0; i < framePools.size(); i++) {
+      framePools[i] = framePoolBuilder.build();
+   }
    // Descriptors
    globalDescriptorPool = MeDescriptorPool::Builder(meDevice)
       .setMaxSets(MeSwapChain::MAX_FRAMES_IN_FLIGHT)
@@ -170,14 +188,21 @@ void MeAppBase::run()
       .build();
    auto globalDescriptorSetLayout = MeDescriptorSetLayout::Builder(meDevice)
       .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT)
+      .addBinding(1, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT)
       .build();
    std::vector<VkDescriptorSet> globalDescriptorSets(MeSwapChain::MAX_FRAMES_IN_FLIGHT);
+
+   // writing descriptor set each frame can slow performance
+   // would be more efficient to implement some sort of caching
+   auto imageInfo = testTexture->getImageInfo();
    for (int i = 0; i < globalDescriptorSets.size(); i++) {
       auto bufferInfo = uboBuffers[i]->descriptorInfo();
       MeDescriptorWriter(*globalDescriptorSetLayout, *globalDescriptorPool)
          .writeBuffer(0, &bufferInfo)
+         .writeImage(1, &imageInfo)
          .build(globalDescriptorSets[i]);
    }
+
    // Render Systems
    MeSimpleRenderSystem simpleRenderSystem{ meDevice,
                                             meRenderer.getSwapChainRenderPass(),
@@ -240,12 +265,14 @@ void MeAppBase::run()
       /* Render System. */
       if (auto commandBuffer = meRenderer.beginFrame()) {
          int frameIndex = meRenderer.getFrameIndex();
+         framePools[frameIndex]->resetPool();
          FrameInfo frameInfo{
             frameIndex,
             frameTime,
             commandBuffer,
             camera,
             globalDescriptorSets[frameIndex],
+            *framePools[frameIndex],
             gameObjects,
             physicsWorld,
          };
