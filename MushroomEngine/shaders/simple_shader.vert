@@ -10,8 +10,6 @@ layout(location = 1) out vec3 fragWorldPos;
 layout(location = 2) out vec3 fragWorldNormal;
 layout(location = 3) out vec2 fragTexCoord;
 
-//layout(location = 2) out vec2 fragTexCoord;
-
 layout(set = 0, binding = 0) uniform GlobalUbo {
     mat4 projection;
     mat4 view;

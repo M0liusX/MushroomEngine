@@ -18,7 +18,7 @@ MeScript::~MeScript()
 {
 	lua_close(luaState);
 }
-
+ 
 
 bool MeScript::CheckLua(int r)
 {

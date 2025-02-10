@@ -55,7 +55,7 @@ static std::shared_ptr<MeTexture> testTexture;
 
 MeAppBase::MeAppBase()
 {
-   testTexture = MeTexture::createTextureFromFile(meDevice, "textures/missing.png");
+   testTexture = MeTexture::createTextureFromFile(meDevice, "textures/ratbase.png");
    start();
 }
 
@@ -90,7 +90,7 @@ void MeAppBase::setCollider(id_t objectId, id_t colliderId) {
    switch (colliderId) {
    case SPHERE:
       object.physicsObject = physicsWorld.AddKinematicObject(MePhysicsObject::createPhysicsObject(object.getId(), object.transform));
-      physicsWorld.getObject(object.physicsObject).setCollider(SphereCollider::create(glm::vec3(.0f), 0.5f));
+      physicsWorld.getObject(object.physicsObject).setCollider(SphereCollider::create(glm::vec3(.0f, .1f, 0.0), 0.5f));
       object.pModel = meResources.getPhysicsModel(SPHERE_MODEL);
       object.diffuseMap = testTexture;
       break;
@@ -220,7 +220,7 @@ void MeAppBase::run()
 
    MeCamera camera{};
    auto cameraObj = MeGameObject::createGameObject();
-   cameraObj.behavior.reset(new MeBasicCamera);
+   cameraObj.behavior.reset(new MeKinematicCamera);
 
    /* Game Clock. */
    auto currentTime = std::chrono::high_resolution_clock::now();
@@ -259,8 +259,8 @@ void MeAppBase::run()
 
       //camera.setOrthographicProjection(-aspect, aspect, -aspect, aspect, -aspect, aspect);
       camera.setPerspectiveProjection(glm::radians(50.f), aspect, .1f, 1000);
-      camera.setViewTarget(gameObjects.at(0).transform.translation + cameraObj.transform.translation, gameObjects.at(0).transform.translation, glm::vec3(0.f, -1.f, 0.f));
-      //camera.setViewYXZ(cameraObj.transform.translation, cameraObj.transform.rotation);
+      // camera.setViewTarget(gameObjects.at(0).transform.translation + cameraObj.transform.translation, gameObjects.at(0).transform.translation, glm::vec3(0.f, -1.f, 0.f));
+      camera.setViewYXZ(cameraObj.transform.translation, cameraObj.transform.rotation);
 
       /* Render System. */
       if (auto commandBuffer = meRenderer.beginFrame()) {

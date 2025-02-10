@@ -9,13 +9,13 @@ CUBE = 2
 KINEMATIC = 0
 CHARACTER = 1
 
--- _ShowPhysics(App)
+_ShowPhysics(App)
 
 object = _LoadGameObject(App)
-_SetModel(App, object, "models/uvcube.obj")
+_SetModel(App, object, "models/ratuv.obj")
 _SetCollider(App, object, SPHERE)
 _SetPosition(App, object, {x= 2, y= -5, z= 2.5})
-_SetScale(App, object, {x= .3, y= .3, z= .3})
+_SetScale(App, object, {x= .3, y= -.3, z= .3})
 _SetBehavior(App, object, CHARACTER)
 
 
@@ -23,7 +23,7 @@ cube = _LoadGameObject(App)
 _SetModel(App, cube, "models/uvcube.obj")
 _SetCollider(App, cube, CUBE)
 _SetPosition(App, cube, {x=0, y=.5, z=2.5})
-_SetScale(App, cube, {x= 5, y=1, z= 5})
+_SetScale(App, cube, {x= 50, y=1, z= 5})
 
 for i=0,100 do
     offset = math.random(-2, 2) * math.random()
@@ -33,6 +33,22 @@ for i=0,100 do
     _SetPosition(App, cube, {x=offset, y=.5, z=6.5 + i * 2.5})
     _SetScale(App, cube, {x= 2, y=1, z= 2})
 end
+
+for i=0,100 do
+    offset = math.random(-2, 2) * math.random() * .25
+    cube = _LoadGameObject(App)
+    _SetModel(App, cube, "models/cube.obj")
+    _SetCollider(App, cube, CUBE)
+    _SetPosition(App, cube, {x= -2 + .75 * i, y= -.15 + -.4     * i, z= 4+offset})
+    _SetScale(App, cube, {x= .3, y= .3, z= .3})
+end
+
+vase = _LoadGameObject(App)
+_SetModel(App, vase, "models/smooth_vase.obj")
+_SetSphereCollider(App, vase, 0.22, {x= 0, y=-.06, z= 0})
+_SetBehavior(App, vase, KINEMATIC)
+_SetPosition(App, vase, {x= 0, y= -2, z= 2.5})
+_SetScale(App, vase, {x= .3, y= .3, z= .3})
 
 --[[
 floor = _LoadGameObject(App)

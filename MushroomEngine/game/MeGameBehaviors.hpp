@@ -99,9 +99,11 @@ struct MeMovingLight : MeBehavior
 struct MeKinematicCamera : me::MeBehavior
 {
    MeAudio* audio = new MeAudio("sounds/Fearofdark - The Coffee Zone - 15 The Coffee Zone.mp3");
-   //MeAudio* sfx = new MeAudio("sounds/sfx/fast_snare.wav");
+   MeAudio* sfx = new MeAudio("sounds/sfx/fast_snare.wav");
    void ready() override
-   {}
+   {
+      audio->Start();
+   }
 
    void update(MeUpdateInfo& info) override
    {
@@ -113,9 +115,9 @@ struct MeKinematicCamera : me::MeBehavior
       glm::vec3 right({ forward.z, 0.f, -forward.x });
       glm::vec3 up({ 0.f, -1.f, 0.f });
 
-      //if (info.map.GetBoolIsNew(MeInput::StartButton)) {
-      //   sfx->Start();
-      //}
+      if (info.map.GetBoolIsNew(MeInput::StartButton)) {
+         sfx->Start();
+      }
       if (info.map.GetBoolIsNew(MeInput::SelectButton)) {
          audio->Start();
       }
@@ -125,10 +127,11 @@ struct MeKinematicCamera : me::MeBehavior
       if (info.map.GetBool(MeInput::SButton)) move -= forward;
       if (info.map.GetBool(MeInput::QButton)) move -= up;
       if (info.map.GetBool(MeInput::EButton)) move += up;
-      //if (info.map.GetBool(MeInput::RightButton)) rotate.y += 1.f;
-      //if (info.map.GetBool(MeInput::LeftButton)) rotate.y -= 1.f;
-      //if (info.map.GetBool(MeInput::UpButton)) rotate.x += 1.f;
-      //if (info.map.GetBool(MeInput::DownButton)) rotate.x -= 1.f;
+      if (info.map.GetBool(MeInput::RightButton)) rotate.y += 1.f;
+      if (info.map.GetBool(MeInput::LeftButton)) rotate.y -= 1.f;
+      if (info.map.GetBool(MeInput::UpButton)) rotate.x += 1.f;
+      if (info.map.GetBool(MeInput::DownButton)) rotate.x -= 1.f;
+
       if (glm::dot(move, move) > std::numeric_limits<float>::epsilon()) {
          info.t.translation += 3.f * info.delta * glm::normalize(move);
       }
@@ -142,7 +145,7 @@ struct MeKinematicCamera : me::MeBehavior
 struct MeBasicCamera : me::MeBehavior
 {
    MeAudio* audio = new MeAudio("sounds/Fearofdark - The Coffee Zone - 15 The Coffee Zone.mp3");
-   //MeAudio* sfx = new MeAudio("sounds/sfx/fast_snare.wav");
+   MeAudio* sfx = new MeAudio("sounds/sfx/fast_snare.wav");
    const float RADIUS = 1.f;
    const float SPEED = 2.f;
    float theta = PI_2 * 3;
@@ -153,9 +156,9 @@ struct MeBasicCamera : me::MeBehavior
 
    void update(MeUpdateInfo& info) override
    {
-      //if (info.map.GetBoolIsNew(MeInput::SpaceButton)) {
-      //   sfx->Start();
-      //}
+      if (info.map.GetBoolIsNew(MeInput::SpaceButton)) {
+         sfx->Start();
+      }
       if (info.map.GetBoolIsNew(MeInput::SelectButton)) {
          audio->Start();
       }

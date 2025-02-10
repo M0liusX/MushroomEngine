@@ -35,7 +35,7 @@ void main() {
 
    vec3 pdLight = pLightColor * max(dot(fwnn, normalize(directionToLight)), 0);
    vec3 ddLight = dLightColor * max(dot(fwnn, normalize(-ubo.directionalLight)), 0);
-   vec3 color = texture(diffuseMap, fragTexCoord).xyz;
+   vec3 color = texture(diffuseMap, vec2(fragTexCoord.x, 1.0f - fragTexCoord.y)).xyz;
    outColor = vec4( (ddLight + pdLight + ambientLight) * color * fragColor, 1.0f);
    // outColor = vec4(color, 1.0f);
    // outColor = vec4((ddLight + pdLight + ambientLight) * fragColor, 1.0f);

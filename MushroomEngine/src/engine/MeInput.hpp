@@ -90,6 +90,7 @@ public:
          map->MapBool(SButton, devicePad, gainput::PadButtonDown);
          map->MapBool(DButton, devicePad, gainput::PadButtonRight);
          map->MapBool(L1Button, devicePad, gainput::PadButtonL1);
+         map->MapBool(SelectButton, devicePad, gainput::PadButtonSelect);
          map->MapFloat(XStick, devicePad, gainput::PadButtonLeftStickX);
          map->MapFloat(YStick, devicePad, gainput::PadButtonLeftStickY);
          map->MapFloat(XStickR, devicePad, gainput::PadButtonRightStickX);
