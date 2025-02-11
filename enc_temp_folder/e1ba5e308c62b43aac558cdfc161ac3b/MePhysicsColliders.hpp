@@ -16,8 +16,8 @@ namespace me {
 struct CollisionPoints {
 	glm::vec3 a;      // Furthest point of a into b
 	glm::vec3 b;      // Furthest point of b into a
-	glm::vec3 normal; // b・a normalized
-	float depth;      // Length of b・a
+	glm::vec3 normal; // b ・a normalized
+	float depth;      // Length of b ・a
 	bool hasCollision;
 };
 

@@ -7,6 +7,7 @@
 #include "MeCamera.hpp"
 #include "MeResources.hpp"
 #include "MeSimpleRenderSystem.hpp"
+#include "MeSimple2DRenderSystem.hpp"
 #include "MePhysicsRenderSystem.hpp"
 #include "MeBillboardRenderSystem.hpp"
 
@@ -185,6 +186,7 @@ void MeAppBase::run()
    globalDescriptorPool = MeDescriptorPool::Builder(meDevice)
       .setMaxSets(MeSwapChain::MAX_FRAMES_IN_FLIGHT)
       .addPoolSize(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, MeSwapChain::MAX_FRAMES_IN_FLIGHT)
+      .addPoolSize(VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, MeSwapChain::MAX_FRAMES_IN_FLIGHT)
       .build();
    auto globalDescriptorSetLayout = MeDescriptorSetLayout::Builder(meDevice)
       .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT)
@@ -207,6 +209,9 @@ void MeAppBase::run()
    MeSimpleRenderSystem simpleRenderSystem{ meDevice,
                                             meRenderer.getSwapChainRenderPass(),
                                             globalDescriptorSetLayout->getDescriptorSetLayout()};
+   MeSimple2DRenderSystem simple2DRenderSystem{ meDevice,
+                                                meRenderer.getSwapChainRenderPass(),
+                                                globalDescriptorSetLayout->getDescriptorSetLayout() };
    MePhysicsRenderSystem physicsRenderSystem{ meDevice,
                                               meRenderer.getSwapChainRenderPass(),
                                               globalDescriptorSetLayout->getDescriptorSetLayout() };
@@ -289,6 +294,7 @@ void MeAppBase::run()
          meRenderer.beginSwapChainRenderPass(commandBuffer);
          if(showPhysics) physicsRenderSystem.renderPhysicsObjects(frameInfo);
          simpleRenderSystem.renderGameObjects(frameInfo);
+         simple2DRenderSystem.renderGameObjects(frameInfo);
          billboardRenderSystem.renderGameObjects(frameInfo);
          meRenderer.endSwapChainRenderPass(commandBuffer);
          meRenderer.endFrame();

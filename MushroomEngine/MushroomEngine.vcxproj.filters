@@ -58,6 +58,12 @@
     <None Include="shaders\physics.vert">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="shaders\simple2d.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\simple2d.vert">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\MeDevice.hpp">
@@ -154,6 +160,9 @@
     <ClInclude Include="src\engine\MeTexture.hpp">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="src\graphics\systems\MeSimple2DRenderSystem.hpp">
+      <Filter>Renderer\Systems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\graphics\MeDevice.cpp">
@@ -211,6 +220,9 @@
     </ClCompile>
     <ClCompile Include="src\engine\MeTexture.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\systems\MeSimple2DRenderSystem.cpp">
+      <Filter>Renderer\Systems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

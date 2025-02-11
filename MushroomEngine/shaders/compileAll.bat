@@ -1,7 +1,12 @@
+echo off
+
 if not exist "bin" mkdir bin
 
 %VULKAN_SDK%/bin/glslc.exe simple_shader.vert -o bin/simple_shader.vert.spv
 %VULKAN_SDK%/bin/glslc.exe simple_shader.frag -o bin/simple_shader.frag.spv
+
+%VULKAN_SDK%/bin/glslc.exe simple2d.vert -o bin/simple2d.vert.spv
+%VULKAN_SDK%/bin/glslc.exe simple2d.frag -o bin/simple2d.frag.spv
 
 %VULKAN_SDK%/bin/glslc.exe billboard_shader.vert -o bin/billboard_shader.vert.spv
 %VULKAN_SDK%/bin/glslc.exe billboard_shader.frag -o bin/billboard_shader.frag.spv

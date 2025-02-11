@@ -189,6 +189,8 @@
     <None Include="shaders\compileAll.bat" />
     <None Include="shaders\physics.frag" />
     <None Include="shaders\physics.vert" />
+    <None Include="shaders\simple2d.frag" />
+    <None Include="shaders\simple2d.vert" />
     <None Include="shaders\simple_shader.frag" />
     <None Include="shaders\simple_shader.vert" />
   </ItemGroup>
@@ -210,6 +212,7 @@
     <ClInclude Include="src\graphics\MePipeline.hpp" />
     <ClInclude Include="src\graphics\MeRenderer.hpp" />
     <ClInclude Include="src\graphics\MeSwapChain.hpp" />
+    <ClInclude Include="src\graphics\systems\MeSimple2DRenderSystem.hpp" />
     <ClInclude Include="src\graphics\systems\MeBillboardRenderSystem.hpp" />
     <ClInclude Include="src\graphics\systems\MePhysicsRenderSystem.hpp" />
     <ClInclude Include="src\graphics\systems\MeRenderSystemsUtility.hpp" />
@@ -240,6 +243,7 @@
     <ClCompile Include="src\graphics\MePipeline.cpp" />
     <ClCompile Include="src\graphics\MeRenderer.cpp" />
     <ClCompile Include="src\graphics\MeSwapChain.cpp" />
+    <ClCompile Include="src\graphics\systems\MeSimple2DRenderSystem.cpp" />
     <ClCompile Include="src\graphics\systems\MeBillboardRenderSystem.cpp" />
     <ClCompile Include="src\graphics\systems\MePhysicsRenderSystem.cpp" />
     <ClCompile Include="src\graphics\systems\MeSimpleRenderSystem.cpp" />
