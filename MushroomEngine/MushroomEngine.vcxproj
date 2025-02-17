@@ -203,6 +203,7 @@
     <ClInclude Include="src\engine\MeLuaWrappers.hpp" />
     <ClInclude Include="src\engine\MeModel.hpp" />
     <ClInclude Include="src\engine\MePhysicsModel.hpp" />
+    <ClInclude Include="src\engine\MePolygon.hpp" />
     <ClInclude Include="src\engine\MeResources.hpp" />
     <ClInclude Include="src\engine\MeScript.hpp" />
     <ClInclude Include="src\engine\MeTexture.hpp" />
@@ -235,6 +236,7 @@
     <ClCompile Include="src\engine\MeCamera.cpp" />
     <ClCompile Include="src\engine\MeModel.cpp" />
     <ClCompile Include="src\engine\MePhysicsModel.cpp" />
+    <ClCompile Include="src\engine\MePolygon.cpp" />
     <ClCompile Include="src\engine\MeScript.cpp" />
     <ClCompile Include="src\engine\MeTexture.cpp" />
     <ClCompile Include="src\graphics\MeBuffer.cpp" />

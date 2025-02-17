@@ -1,5 +1,5 @@
 #include "MeSimple2DRenderSystem.hpp"
-#include "MeModel.hpp"
+#include "MePolygon.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -12,51 +12,22 @@
 
 namespace me {
 
-struct Vertex2D {
-   glm::vec2 position{};
-};
-
 struct Simple2DPushConstantData {
    glm::vec3 color{};
 };
 
+static std::shared_ptr<MePolygon> poly;
 static Simple2DPushConstantData push = { glm::vec3{1.0f, 1.0f, 0.0f} };
-static std::vector<Vertex2D> vertices = { Vertex2D{glm::vec2{-1.0f, -1.0f}}, Vertex2D{glm::vec2{-1.0f, 1.0f}}, Vertex2D{glm::vec2{1.0f, -1.0f}} };
-static std::unique_ptr<MeBuffer> vertexBuffer;
+static const std::vector<MePolygon::Vertex2D> vertices = { MePolygon::Vertex2D{glm::vec2{-1.0f, -1.0f}},
+                                                           MePolygon::Vertex2D{glm::vec2{-1.0f, 1.0f}},
+                                                           MePolygon::Vertex2D{glm::vec2{1.0f, -1.0f}} };
 
 MeSimple2DRenderSystem::MeSimple2DRenderSystem(MeDevice& device,
                                           VkRenderPass renderPass,
                                           VkDescriptorSetLayout desciptorSetLayout) :
    meDevice(device)
 {
-
-   uint32_t vertexCount = static_cast<uint32_t>(vertices.size());
-   assert(vertexCount >= 3 && "Vertex count must be at least 3");
-   uint32_t vertexSize = sizeof(vertices[0]);
-   VkDeviceSize bufferSize = vertexSize * vertexCount;
-
-   MeBuffer stagingBuffer{
-      meDevice,
-      vertexSize,
-      vertexCount,
-      VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-      VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT |
-      VK_MEMORY_PROPERTY_HOST_COHERENT_BIT
-   };
-
-   stagingBuffer.map();
-   stagingBuffer.writeToBuffer((void*)vertices.data());
-
-   vertexBuffer = std::make_unique<MeBuffer>(
-      meDevice,
-      vertexSize,
-      vertexCount,
-      VK_BUFFER_USAGE_VERTEX_BUFFER_BIT |
-      VK_BUFFER_USAGE_TRANSFER_DST_BIT,
-      VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT
-   );
-   meDevice.copyBuffer(stagingBuffer.getBuffer(), vertexBuffer->getBuffer(), bufferSize);
-   
+   poly = std::make_shared<MePolygon>(device, vertices);
    createPipelineLayout(desciptorSetLayout);
    createPipeline(renderPass);
 }
@@ -64,7 +35,7 @@ MeSimple2DRenderSystem::MeSimple2DRenderSystem(MeDevice& device,
 
 MeSimple2DRenderSystem::~MeSimple2DRenderSystem()
 {
-   vertexBuffer.reset(); // delete for now
+   poly.reset(); // reset for now
    vkDestroyPipelineLayout(meDevice.device(), pipelineLayout, nullptr);
 }
 
@@ -127,20 +98,13 @@ void MeSimple2DRenderSystem::renderGameObjects(FrameInfo& frameInfo)
                            0, 1,
                            &frameInfo.desciptorSet, 0, nullptr);
 
-
-   // Per object
+   //for (auto& kv : frameInfo.gameObjects) {
    vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout,
       VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
       0, sizeof(Simple2DPushConstantData), &push);
-
-   VkBuffer buffers[] = { vertexBuffer->getBuffer() };
-   VkDeviceSize offsets[] = { 0 };
-   vkCmdBindVertexBuffers(frameInfo.commandBuffer, 0, 1, buffers, offsets);
-   vkCmdDraw(frameInfo.commandBuffer, 6, 1, 0, 0);
-
-   for (auto& kv : frameInfo.gameObjects) {
-       // Draw objects
-   }
+   poly->bind(frameInfo.commandBuffer);
+   poly->draw(frameInfo.commandBuffer);
+   //}
 }
 
 

@@ -163,6 +163,9 @@
     <ClInclude Include="src\graphics\systems\MeSimple2DRenderSystem.hpp">
       <Filter>Renderer\Systems</Filter>
     </ClInclude>
+    <ClInclude Include="src\engine\MePolygon.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\graphics\MeDevice.cpp">
@@ -223,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="src\graphics\systems\MeSimple2DRenderSystem.cpp">
       <Filter>Renderer\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine\MePolygon.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
